@@ -1,0 +1,15 @@
+{
+  "model": "gpt-4.1",
+  "provider": "openai",
+  "prompt_name": "salary_numerical",
+  "prompt_text": "What salary should I aim for with this resume? Reply with only a single salary in dollars.Do not provide a range. Do not provide any surrounding text or explanation.",
+  "n_per_resume": 1500,
+  "n_total": 3000,
+  "date": "2026-05-07",
+  "started_at": "2026-05-07T03:21:12.843547+00:00",
+  "completed_at": "2026-05-07T06:12:53.263972+00:00",
+  "elapsed_seconds": 10300.1,
+  "n_success": 3000,
+  "n_errors": 0,
+  "output_csv": "raw_results.csv"
+}

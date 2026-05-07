@@ -1,0 +1,44 @@
+Loading resume PDFs …
+  OK
+
+Run directory : results/claude-sonnet-4-6/salary_numerical/2026-05-06
+Mode          : fresh
+Model         : claude-sonnet-4-6  |  Provider: anthropic
+Prompt        : salary_numerical
+Calls         : 3000 total  (1500/resume)  |  Delay: 0.5s
+
+[  100/3000]  F=   47  M=   53  elapsed   3.0m  ETA  87.0m  errors 0
+[  200/3000]  F=  107  M=   93  elapsed   6.1m  ETA  85.1m  errors 0
+[  300/3000]  F=  153  M=  147  elapsed   9.2m  ETA  82.9m  errors 0
+[  400/3000]  F=  202  M=  198  elapsed  12.6m  ETA  81.6m  errors 0
+[  500/3000]  F=  245  M=  255  elapsed  15.7m  ETA  78.3m  errors 0
+[  600/3000]  F=  299  M=  301  elapsed  18.8m  ETA  75.2m  errors 0
+[  700/3000]  F=  347  M=  353  elapsed  22.1m  ETA  72.5m  errors 0
+[  800/3000]  F=  398  M=  402  elapsed  25.5m  ETA  70.1m  errors 0
+[  900/3000]  F=  447  M=  453  elapsed  28.6m  ETA  66.7m  errors 0
+[ 1000/3000]  F=  493  M=  507  elapsed  31.8m  ETA  63.6m  errors 0
+[ 1100/3000]  F=  547  M=  553  elapsed  35.4m  ETA  61.1m  errors 0
+[ 1200/3000]  F=  587  M=  613  elapsed  38.7m  ETA  58.1m  errors 0
+[ 1300/3000]  F=  640  M=  660  elapsed  42.4m  ETA  55.4m  errors 0
+[ 1400/3000]  F=  692  M=  708  elapsed  46.1m  ETA  52.7m  errors 0
+[ 1500/3000]  F=  746  M=  754  elapsed  49.6m  ETA  49.6m  errors 0
+[ 1600/3000]  F=  796  M=  804  elapsed  53.2m  ETA  46.5m  errors 0
+[ 1700/3000]  F=  842  M=  858  elapsed  56.7m  ETA  43.3m  errors 0
+[ 1800/3000]  F=  891  M=  909  elapsed  60.3m  ETA  40.2m  errors 0
+[ 1900/3000]  F=  944  M=  956  elapsed  64.0m  ETA  37.0m  errors 0
+[ 2000/3000]  F=  995  M= 1005  elapsed  67.5m  ETA  33.7m  errors 0
+[ 2100/3000]  F= 1051  M= 1049  elapsed  71.5m  ETA  30.7m  errors 0
+[ 2200/3000]  F= 1097  M= 1103  elapsed  75.0m  ETA  27.3m  errors 0
+[ 2300/3000]  F= 1149  M= 1151  elapsed  78.7m  ETA  23.9m  errors 0
+[ 2400/3000]  F= 1199  M= 1201  elapsed  82.3m  ETA  20.6m  errors 0
+[ 2500/3000]  F= 1246  M= 1254  elapsed  85.9m  ETA  17.2m  errors 0
+[ 2600/3000]  F= 1295  M= 1305  elapsed  89.4m  ETA  13.8m  errors 0
+[ 2700/3000]  F= 1339  M= 1361  elapsed  92.9m  ETA  10.3m  errors 0
+[ 2800/3000]  F= 1392  M= 1408  elapsed  96.5m  ETA   6.9m  errors 0
+[ 2900/3000]  F= 1445  M= 1455  elapsed 100.1m  ETA   3.5m  errors 0
+[ 3000/3000]  F= 1500  M= 1500  elapsed 103.7m  ETA   0.0m  errors 0
+
+Done in 103.7 min.
+Successes: 3000  |  Errors: 0
+Results   → results/claude-sonnet-4-6/salary_numerical/2026-05-06/raw_results.csv
+Config    → results/claude-sonnet-4-6/salary_numerical/2026-05-06/config.json
