@@ -1,0 +1,15 @@
+{
+  "model": "gemini-3-flash",
+  "provider": "google",
+  "prompt_name": "salary_numerical",
+  "prompt_text": "What salary should I aim for with this resume? Reply with only a single salary in dollars.Do not provide a range. Do not provide any surrounding text or explanation.",
+  "n_per_resume": 1500,
+  "n_total": 3000,
+  "date": "2026-05-16",
+  "started_at": "2026-05-16T10:00:10.212887+00:00",
+  "completed_at": "2026-05-16T13:08:32.548451+00:00",
+  "elapsed_seconds": 11302.0,
+  "n_success": 2996,
+  "n_errors": 4,
+  "output_csv": "raw_results.csv"
+}

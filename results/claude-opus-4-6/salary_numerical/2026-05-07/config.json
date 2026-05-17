@@ -1,0 +1,15 @@
+{
+  "model": "claude-opus-4-6",
+  "provider": "anthropic",
+  "prompt_name": "salary_numerical",
+  "prompt_text": "What salary should I aim for with this resume? Reply with only a single salary in dollars.Do not provide a range. Do not provide any surrounding text or explanation.",
+  "n_per_resume": 1500,
+  "n_total": 3000,
+  "date": "2026-05-07",
+  "started_at": "2026-05-07T08:39:11.529258+00:00",
+  "completed_at": "2026-05-07T15:38:21.527895+00:00",
+  "elapsed_seconds": 25149.9,
+  "n_success": 2888,
+  "n_errors": 112,
+  "output_csv": "raw_results.csv"
+}

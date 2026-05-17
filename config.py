@@ -8,44 +8,66 @@ or rely on the prefix-based fallback in get_provider().
 from typing import TypedDict
 
 
-class ModelConfig(TypedDict):
-    provider:   str    # "anthropic" | "openai"
-    max_tokens: int
-    delay:      float  # seconds between successive calls
+class ModelConfig(TypedDict, total=False):
+    provider:              str    # "anthropic" | "openai" | "google"  (required)
+    max_tokens:            int    # (required)
+    delay:                 float  # seconds between successive calls     (required)
+    max_completion_tokens: bool   # OpenAI models requiring max_completion_tokens
+    api_model_id:          str    # actual API model ID when it differs from the key
 
 
 MODELS: dict[str, ModelConfig] = {
     # ── Anthropic ────────────────────────────────────────────────────────────
     "claude-sonnet-4-6": {
-        "provider":   "anthropic",
-        "max_tokens": 64,
-        "delay":      0.5,
+        "provider":              "anthropic",
+        "max_tokens":            64,
+        "delay":                 0.5,
+        "max_completion_tokens": False,
     },
     "claude-opus-4-6": {
-        "provider":   "anthropic",
-        "max_tokens": 64,
-        "delay":      0.5,
+        "provider":              "anthropic",
+        "max_tokens":            64,
+        "delay":                 0.5,
+        "max_completion_tokens": False,
     },
     "claude-haiku-4-5": {
-        "provider":   "anthropic",
-        "max_tokens": 64,
-        "delay":      0.5,
+        "provider":              "anthropic",
+        "max_tokens":            64,
+        "delay":                 0.5,
+        "max_completion_tokens": False,
     },
     # ── OpenAI ───────────────────────────────────────────────────────────────
     "gpt-4.1": {
-        "provider":   "openai",
-        "max_tokens": 64,
-        "delay":      0.5,
+        "provider":              "openai",
+        "max_tokens":            64,
+        "delay":                 0.5,
+        "max_completion_tokens": False,
     },
     "gpt-4o": {
-        "provider":   "openai",
-        "max_tokens": 64,
-        "delay":      0.5,
+        "provider":              "openai",
+        "max_tokens":            64,
+        "delay":                 0.5,
+        "max_completion_tokens": False,
     },
     "gpt-4o-mini": {
-        "provider":   "openai",
-        "max_tokens": 64,
-        "delay":      0.5,
+        "provider":              "openai",
+        "max_tokens":            64,
+        "delay":                 0.5,
+        "max_completion_tokens": False,
+    },
+    "gpt-5.5": {
+        "provider":              "openai",
+        "max_tokens":            64,
+        "delay":                 0.5,
+        "max_completion_tokens": True,   # requires max_completion_tokens, not max_tokens
+    },
+    # ── Google ───────────────────────────────────────────────────────────────
+    "gemini-3-flash": {
+        "provider":              "google",
+        "max_tokens":            64,
+        "delay":                 0.5,
+        "max_completion_tokens": False,
+        "api_model_id":          "models/gemini-3-flash-preview",
     },
 }
 
@@ -56,6 +78,7 @@ _PREFIX_MAP: list[tuple[str, str]] = [
     ("o1",       "openai"),
     ("o3",       "openai"),
     ("o4",       "openai"),
+    ("gemini-",  "google"),
 ]
 
 
@@ -80,4 +103,5 @@ def get_config(model: str) -> ModelConfig:
         provider=get_provider(model),
         max_tokens=64,
         delay=0.5,
+        max_completion_tokens=False,
     )

@@ -43,6 +43,7 @@ import argparse
 import base64
 import csv
 import json
+import os
 import re
 import random
 import time
@@ -51,6 +52,8 @@ from pathlib import Path
 
 import anthropic
 import openai
+from google import genai as google_genai
+from google.genai import errors as google_errors
 import pandas as pd
 from dotenv import load_dotenv
 from pypdf import PdfReader
@@ -87,33 +90,48 @@ def _sanitize(name: str) -> str:
     return re.sub(r"[^\w.\-]", "_", name)
 
 
+def _dir_sort_key(d: Path) -> tuple:
+    """Natural sort key for run directories: (date, run_number).
+
+    Handles both  YYYY-MM-DD  and  YYYY-MM-DD_N  directory names so that
+    cross-date resume always picks the globally most recent run.
+    """
+    parts = d.name.split("_", 1)
+    date_part = parts[0]                             # "YYYY-MM-DD"
+    run_num   = int(parts[1]) if len(parts) > 1 else 0
+    return (date_part, run_num)
+
+
 def resolve_run_dir(model: str, prompt_name: str, date_str: str, fresh: bool = False) -> Path:
-    """Return the run directory for this model/prompt/date.
+    """Return the run directory for this model/prompt.
 
-    Default (fresh=False): return the most recent existing directory so an
-    interrupted run can be resumed.
+    Default (fresh=False): resume the globally most recent run directory,
+    regardless of date — so an interrupted run is always picked up even after
+    the calendar date rolls over.
 
-    With fresh=True: return a new directory, preserving old results.
-        First run  →  …/{date}/
-        Second run →  …/{date}_2/
-        Third run  →  …/{date}_3/   etc.
+    With fresh=True: create a new directory for today, preserving old results.
+        First run today  →  …/{date}/
+        Second run today →  …/{date}_2/
+        Third run today  →  …/{date}_3/   etc.
     """
     base = RESULTS_DIR / _sanitize(model) / _sanitize(prompt_name)
 
-    # Collect all existing run dirs for this date (base + numbered suffixes).
-    existing = sorted(
-        [d for d in base.glob(f"{date_str}*") if d.is_dir()],
-        key=lambda d: (len(d.name), d.name),
-    )
-
     if not fresh:
-        # Resume: use the most recent directory (or create the base one).
-        return existing[-1] if existing else base / date_str
+        # Resume: search across all dates and return the most recent directory.
+        all_dirs = sorted(
+            [d for d in base.glob("*") if d.is_dir()],
+            key=_dir_sort_key,
+        )
+        return all_dirs[-1] if all_dirs else base / date_str
 
-    # Fresh: create the next available directory.
-    if not existing:
+    # Fresh: create the next available directory for today's date.
+    today_dirs = sorted(
+        [d for d in base.glob(f"{date_str}*") if d.is_dir()],
+        key=_dir_sort_key,
+    )
+    if not today_dirs:
         return base / date_str
-    return base / f"{date_str}_{len(existing) + 1}"
+    return base / f"{date_str}_{len(today_dirs) + 1}"
 
 
 # ---------------------------------------------------------------------------
@@ -179,17 +197,40 @@ def _call_openai(
     prompt: str,
     prompt_name: str,
     max_tokens: int,
+    use_max_completion_tokens: bool = False,
 ) -> dict:
+    token_kwargs = (
+        {"max_completion_tokens": max_tokens}
+        if use_max_completion_tokens
+        else {"max_tokens": max_tokens}
+    )
     response = client.chat.completions.create(
         model=model,
-        max_tokens=max_tokens,
         messages=[{
             "role": "user",
             "content": f"{resume_text}\n\n{prompt}",
         }],
+        **token_kwargs,
     )
     raw = (response.choices[0].message.content or "").strip()
     return _make_row(gender, raw, model, prompt_name)
+
+
+def _call_google(
+    client: google_genai.Client,
+    resume_text: str,
+    gender: str,
+    api_model_id: str,   # actual API model identifier (e.g. "models/gemini-3-flash-preview")
+    model_label: str,    # label stored in CSV (e.g. "gemini-3-flash")
+    prompt: str,
+    prompt_name: str,
+) -> dict:
+    response = client.models.generate_content(
+        model=api_model_id,
+        contents=f"{resume_text}\n\n{prompt}",
+    )
+    raw = (response.text or "").strip()
+    return _make_row(gender, raw, model_label, prompt_name)
 
 
 def _make_row(gender: str, raw: str, model: str, prompt_name: str) -> dict:
@@ -286,11 +327,13 @@ def main() -> None:
             f"Unknown prompt '{prompt_name}'. Available: {list(PROMPTS)}"
         )
 
-    prompt   = PROMPTS[prompt_name]
-    cfg      = get_config(model)
-    provider = cfg["provider"]
-    delay    = cfg["delay"]
-    max_tok  = cfg["max_tokens"]
+    prompt        = PROMPTS[prompt_name]
+    cfg           = get_config(model)
+    provider      = cfg["provider"]
+    delay         = cfg["delay"]
+    max_tok       = cfg["max_tokens"]
+    use_mct       = cfg.get("max_completion_tokens", False)
+    api_model_id  = cfg.get("api_model_id", model)  # falls back to model name
 
     # ── Resolve and create the run directory ────────────────────────────────
     date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
@@ -323,6 +366,8 @@ def main() -> None:
         client = anthropic.Anthropic()
     elif provider == "openai":
         client = openai.OpenAI()
+    elif provider == "google":
+        client = google_genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
     else:
         raise ValueError(f"Unknown provider '{provider}'")
 
@@ -337,12 +382,20 @@ def main() -> None:
             return _call_anthropic(
                 client, data, gender, model, prompt, prompt_name, max_tok  # type: ignore[arg-type]
             )
-    else:
+    elif provider == "openai":
         resume_data = {g: _extract_pdf_text(p) for g, p in RESUMES.items()}
 
         def call_fn(gender: str, data: str) -> dict:
             return _call_openai(
-                client, data, gender, model, prompt, prompt_name, max_tok  # type: ignore[arg-type]
+                client, data, gender, model, prompt, prompt_name, max_tok,  # type: ignore[arg-type]
+                use_max_completion_tokens=use_mct,
+            )
+    else:  # google
+        resume_data = {g: _extract_pdf_text(p) for g, p in RESUMES.items()}
+
+        def call_fn(gender: str, data: str) -> dict:
+            return _call_google(
+                client, data, gender, api_model_id, model, prompt, prompt_name  # type: ignore[arg-type]
             )
     print("  OK\n")
 
@@ -398,6 +451,17 @@ def main() -> None:
                 print(
                     f"\n  [rate-limit] waiting {wait}s "
                     f"(attempt {retries}/{MAX_RETRIES}) …",
+                    flush=True,
+                )
+                time.sleep(wait)
+
+            except google_errors.ClientError as exc:
+                retries += 1
+                # Respect the retry-after hint from Google's error when present.
+                wait = 60 if "429" in str(exc) else 10 * retries
+                print(
+                    f"\n  [Google error] {str(exc)[:120]} "
+                    f"— waiting {wait}s (attempt {retries}/{MAX_RETRIES}) …",
                     flush=True,
                 )
                 time.sleep(wait)
