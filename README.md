@@ -6,6 +6,8 @@ Does the perceived gender of a job candidate influence the salary estimate produ
 
 ---
 
+
+
 ## Key Findings
 
 Five of six models recommend higher salaries for the male-coded resume (Ishan). After Bonferroni correction across six simultaneous tests (α = 0.05 / 6 = 0.0083), three models show statistically significant gaps.
@@ -17,7 +19,7 @@ Five of six models recommend higher salaries for the male-coded resume (Ishan). 
 | GPT-4.1 | $164,993 | $165,669 | +$676 | +0.41% | 6.7e-03 ** | +0.12 | Negligible |
 | Claude Haiku 4.5 | $140,017 | $142,177 | +$2,160 | +1.54% | 2.8e-02 * | +0.10 | Negligible |
 | Gemini 3 Flash | $143,924 | $144,238 | +$314 | +0.22% | 0.72 ns | +0.06 | Negligible |
-| GPT-4o Mini | $123,487 | $123,037 | **−$450** | −0.36% | 0.19 ns | −0.08 | Negligible |
+| GPT-4o Mini | $123,487 | $123,037 | −$450 | −0.36% | 0.19 ns | −0.08 | Negligible |
 
 **Claude Sonnet 4.6** is the outlier. A Cohen's d of 1.26 is a large effect — male salary recommendations ranked higher than female ones in 74.7% of matched pairs (AUC = 0.747). The 95% bootstrap CI on the gap is [$6,267, $7,050], ruling out chance entirely.
 
@@ -32,6 +34,8 @@ Five of six models recommend higher salaries for the male-coded resume (Ishan). 
 ### Distribution Plot
 
 ![Salary distributions by model and gender](d1_final.html)
+![Salary distributions by model and gender]([[https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png](https://github.com/ishacheshi/llm-gender-pay-gap/blob/main/plots/d1_final.html)](https://github.com/ishacheshi/llm-gender-pay-gap/blob/main/plots/d1_final.html) "Salary distributions by model and gender")
+
 
 ### Percentage Gap by Model
 
