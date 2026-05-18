@@ -6,6 +6,7 @@ Does the perceived gender of a job candidate influence the salary estimate produ
 
 ---
 
+<img width="990" height="461" alt="Salary distributions by model and gender" src="https://github.com/user-attachments/assets/13357f9b-0113-4580-800c-3253b9239edb" />
 
 
 ## Key Findings
@@ -31,16 +32,10 @@ Five of six models recommend higher salaries for the male-coded resume (Ishan). 
 
 **Gemini 3 Flash** shows no meaningful gap in either direction.
 
-### Distribution Plot
-
-![Salary distributions by model and gender](d1_final.html)
-![Salary distributions by model and gender]([[https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png](https://github.com/ishacheshi/llm-gender-pay-gap/blob/main/plots/d1_final.html)](https://github.com/ishacheshi/llm-gender-pay-gap/blob/main/plots/d1_final.html) "Salary distributions by model and gender")
-<img width="990" height="461" alt="Salary distributions by model and gender" src="https://github.com/user-attachments/assets/10691ef6-b34c-4536-aedd-e5f8354470e8" />
-
-
 ### Percentage Gap by Model
 
-![Percentage salary gap by model](g3_pct_lollipop.html)
+<img width="847" height="400" alt="Percentage salary gap by model" src="https://github.com/user-attachments/assets/b36fd937-daa4-4d6f-bc0a-e685f3b1d223" />
+
 
 ---
 
