@@ -28,7 +28,9 @@ Five of six models recommend higher salaries for the male-coded resume (Ishan). 
 
 **GPT-4.1** has a detectable gap at this sample size but d = 0.12 is negligible in practical terms. An AUC of 0.532 is barely above the 0.5 chance baseline.
 
-**Claude Haiku 4.5** and **GPT-4o Mini** do not survive Bonferroni correction. GPT-4o Mini is the only model where the gap is reversed (female slightly higher), though the effect is not significant.
+**Claude Haiku 4.5** shows a significant gap after Bonferroni correction (p = 0.028), but the effect size is negligible (d = 0.10). However, the median gap is $10,000 ($130,000 female vs $140,000 male) — a meaningful difference that the mean and Cohen's d obscure due to Haiku's high variance across responses.
+
+**GPT-4o Mini** is the only model that does not survive Bonferroni correction (p = 0.19) and the only one where the gap is reversed, with the female-coded resume receiving a slightly higher estimate. Neither direction nor magnitude is significant.
 
 **Gemini 3 Flash** shows no meaningful gap in either direction.
 
