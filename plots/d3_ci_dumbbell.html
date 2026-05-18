@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@6.1.0"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300, "strokeWidth": 0}, "axis": {"gridColor": "#f0f0f0", "gridWidth": 0.5, "labelFont": "Helvetica Neue, Arial, sans-serif", "labelFontSize": 12, "tickColor": "#ccc", "titleFont": "Helvetica Neue, Arial, sans-serif", "titleFontSize": 13}, "legend": {"labelFont": "Helvetica Neue, Arial, sans-serif", "labelFontSize": 12, "titleFont": "Helvetica Neue, Arial, sans-serif", "titleFontSize": 12}, "title": {"anchor": "start", "font": "Helvetica Neue, Arial, sans-serif", "fontSize": 16, "fontWeight": "bold", "subtitleColor": "#666", "subtitleFontSize": 11}}, "layer": [{"data": {"name": "data-e06bb050491f4878f0c18ef689f5e639"}, "mark": {"type": "rule", "strokeWidth": 2.5}, "encoding": {"color": {"condition": {"test": "datum.Sig", "value": "#444"}, "value": "#ccc"}, "strokeDash": {"condition": {"test": "datum.Sig", "value": [1, 0]}, "value": [4, 3]}, "x": {"axis": {"format": "$,.0f", "labelAngle": -20, "tickCount": 5}, "field": "Ishani", "scale": {"zero": false}, "type": "quantitative"}, "x2": {"field": "Ishan"}, "y": {"axis": {"labelFontSize": 12, "labelLimit": 200}, "field": "Model_lbl", "sort": ["Claude Haiku 4.5 \u2605", "Claude Sonnet 4.6 \u2605", "Claude Opus 4.6 \u2605", "GPT-4o Mini", "GPT-4.1 \u2605", "Gemini 3 Flash"], "title": null, "type": "nominal"}}}, {"data": {"name": "data-43972f80c94e8ca0f4b220d742a4dcce"}, "mark": {"type": "errorbar", "ticks": true}, "encoding": {"color": {"field": "Name", "scale": {"domain": ["Ishani", "Ishan"], "range": ["#E07B7B", "#6B9BD2"]}, "type": "nominal"}, "x": {"field": "ci_lo", "type": "quantitative"}, "x2": {"field": "ci_hi"}, "y": {"field": "Model_lbl", "sort": ["Claude Haiku 4.5 \u2605", "Claude Sonnet 4.6 \u2605", "Claude Opus 4.6 \u2605", "GPT-4o Mini", "GPT-4.1 \u2605", "Gemini 3 Flash"], "type": "nominal"}}}, {"data": {"name": "data-43972f80c94e8ca0f4b220d742a4dcce"}, "mark": {"type": "circle", "opacity": 1, "size": 80}, "encoding": {"color": {"field": "Name", "legend": {"orient": "bottom", "title": "Resume name"}, "scale": {"domain": ["Ishani", "Ishan"], "range": ["#E07B7B", "#6B9BD2"]}, "type": "nominal"}, "x": {"field": "mean", "title": "Mean Recommended Annual Salary (USD)", "type": "quantitative"}, "y": {"field": "Model_lbl", "sort": ["Claude Haiku 4.5 \u2605", "Claude Sonnet 4.6 \u2605", "Claude Opus 4.6 \u2605", "GPT-4o Mini", "GPT-4.1 \u2605", "Gemini 3 Flash"], "type": "nominal"}}}], "height": 300, "title": {"text": "Group Means with 95% Confidence Intervals", "subtitle": ["Solid connector = Bonferroni-significant gap. \u2605 = Bonferroni-corrected significance (\u03b1 = 0.05 / 6 models)"]}, "width": 540, "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json", "datasets": {"data-e06bb050491f4878f0c18ef689f5e639": [{"Model": "Claude Haiku 4.5", "Model_lbl": "Claude Haiku 4.5 \u2605", "Family": "Claude", "Ishan": 142176.66666666666, "Ishani": 140016.66666666666, "Sig": true, "SigColor": "#9c1e11"}, {"Model": "Claude Opus 4.6", "Model_lbl": "Claude Opus 4.6 \u2605", "Family": "Claude", "Ishan": 135870.76710435384, "Ishani": 135000.0, "Sig": true, "SigColor": "#9c1e11"}, {"Model": "Claude Sonnet 4.6", "Model_lbl": "Claude Sonnet 4.6 \u2605", "Family": "Claude", "Ishan": 136936.66666666666, "Ishani": 130283.33333333333, "Sig": true, "SigColor": "#9c1e11"}, {"Model": "GPT-4.1", "Model_lbl": "GPT-4.1 \u2605", "Family": "OpenAI", "Ishan": 165668.66666666666, "Ishani": 164992.66666666666, "Sig": true, "SigColor": "#9c1e11"}, {"Model": "GPT-4o Mini", "Model_lbl": "GPT-4o Mini", "Family": "OpenAI", "Ishan": 123036.66666666667, "Ishani": 123486.66666666667, "Sig": false, "SigColor": "#b0b0b0"}, {"Model": "Gemini 3 Flash", "Model_lbl": "Gemini 3 Flash", "Family": "Google", "Ishan": 144238.38383838383, "Ishani": 143924.10119840212, "Sig": false, "SigColor": "#b0b0b0"}], "data-43972f80c94e8ca0f4b220d742a4dcce": [{"Model": "Claude Haiku 4.5", "Model_lbl": "Claude Haiku 4.5 \u2605", "Family": "Claude", "Name": "Ishan", "mean": 142176.66666666666, "std": 21120.51545309028, "n": 1500, "ci_lo": 141107.82111305502, "ci_hi": 143245.5122202783}, {"Model": "Claude Haiku 4.5", "Model_lbl": "Claude Haiku 4.5 \u2605", "Family": "Claude", "Name": "Ishani", "mean": 140016.66666666666, "std": 20712.372883919987, "n": 1500, "ci_lo": 138968.47597686583, "ci_hi": 141064.8573564675}, {"Model": "Claude Opus 4.6", "Model_lbl": "Claude Opus 4.6 \u2605", "Family": "Claude", "Name": "Ishan", "mean": 135870.76710435384, "std": 2820.4491182383204, "n": 1447, "ci_lo": 135725.44219018606, "ci_hi": 136016.09201852162}, {"Model": "Claude Opus 4.6", "Model_lbl": "Claude Opus 4.6 \u2605", "Family": "Claude", "Name": "Ishani", "mean": 135000.0, "std": 0.0, "n": 1441, "ci_lo": 135000.0, "ci_hi": 135000.0}, {"Model": "Claude Sonnet 4.6", "Model_lbl": "Claude Sonnet 4.6 \u2605", "Family": "Claude", "Name": "Ishan", "mean": 136936.66666666666, "std": 7243.45456106461, "n": 1500, "ci_lo": 136570.0972892489, "ci_hi": 137303.23604408442}, {"Model": "Claude Sonnet 4.6", "Model_lbl": "Claude Sonnet 4.6 \u2605", "Family": "Claude", "Name": "Ishani", "mean": 130283.33333333333, "std": 1872.2693406340184, "n": 1500, "ci_lo": 130188.58343178169, "ci_hi": 130378.08323488497}, {"Model": "GPT-4.1", "Model_lbl": "GPT-4.1 \u2605", "Family": "OpenAI", "Name": "Ishan", "mean": 165668.66666666666, "std": 5698.584689833114, "n": 1500, "ci_lo": 165380.27849161782, "ci_hi": 165957.0548417155}, {"Model": "GPT-4.1", "Model_lbl": "GPT-4.1 \u2605", "Family": "OpenAI", "Name": "Ishani", "mean": 164992.66666666666, "std": 5649.828309678221, "n": 1500, "ci_lo": 164706.74590488974, "ci_hi": 165278.58742844357}, {"Model": "GPT-4o Mini", "Model_lbl": "GPT-4o Mini", "Family": "OpenAI", "Name": "Ishan", "mean": 123036.66666666667, "std": 5533.148535029213, "n": 1500, "ci_lo": 122756.65071619074, "ci_hi": 123316.68261714261}, {"Model": "GPT-4o Mini", "Model_lbl": "GPT-4o Mini", "Family": "OpenAI", "Name": "Ishani", "mean": 123486.66666666667, "std": 5946.993641984784, "n": 1500, "ci_lo": 123185.70726415067, "ci_hi": 123787.62606918268}, {"Model": "Gemini 3 Flash", "Model_lbl": "Gemini 3 Flash", "Family": "Google", "Name": "Ishan", "mean": 144238.38383838383, "std": 5641.921216597575, "n": 1485, "ci_lo": 143951.42483065312, "ci_hi": 144525.34284611454}, {"Model": "Gemini 3 Flash", "Model_lbl": "Gemini 3 Flash", "Family": "Google", "Name": "Ishani", "mean": 143924.10119840212, "std": 5390.132590037688, "n": 1502, "ci_lo": 143651.50452391556, "ci_hi": 144196.69787288868}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

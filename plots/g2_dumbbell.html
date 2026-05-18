@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@6.1.0"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300, "strokeWidth": 0}, "axis": {"gridColor": "#f0f0f0", "gridWidth": 0.5, "labelFont": "Helvetica Neue, Arial, sans-serif", "labelFontSize": 12, "tickColor": "#ccc", "titleFont": "Helvetica Neue, Arial, sans-serif", "titleFontSize": 13}, "legend": {"labelFont": "Helvetica Neue, Arial, sans-serif", "labelFontSize": 12, "titleFont": "Helvetica Neue, Arial, sans-serif", "titleFontSize": 12}, "title": {"anchor": "start", "font": "Helvetica Neue, Arial, sans-serif", "fontSize": 16, "fontWeight": "bold", "subtitleColor": "#666", "subtitleFontSize": 11}}, "layer": [{"data": {"name": "data-e06bb050491f4878f0c18ef689f5e639"}, "mark": {"type": "rule", "strokeWidth": 3}, "encoding": {"color": {"condition": {"test": "datum.Sig", "value": "#555"}, "value": "#ccc"}, "x": {"axis": {"format": "$,.0f", "labelAngle": -20, "tickCount": 5}, "field": "Ishani", "scale": {"zero": false}, "type": "quantitative"}, "x2": {"field": "Ishan"}, "y": {"axis": {"labelFontSize": 12, "labelLimit": 200}, "field": "Model_lbl", "sort": ["Claude Haiku 4.5 \u2605", "Claude Sonnet 4.6 \u2605", "Claude Opus 4.6 \u2605", "GPT-4o Mini", "GPT-4.1 \u2605", "Gemini 3 Flash"], "title": null, "type": "nominal"}}}, {"data": {"name": "data-e06bb050491f4878f0c18ef689f5e639"}, "mark": {"type": "circle", "color": "#E07B7B", "size": 100}, "encoding": {"tooltip": [{"field": "Model_lbl", "type": "nominal"}, {"field": "Ishani", "format": "$,.0f", "title": "Ishani mean", "type": "quantitative"}], "x": {"field": "Ishani", "title": "Mean Recommended Annual Salary (USD)", "type": "quantitative"}, "y": {"field": "Model_lbl", "sort": ["Claude Haiku 4.5 \u2605", "Claude Sonnet 4.6 \u2605", "Claude Opus 4.6 \u2605", "GPT-4o Mini", "GPT-4.1 \u2605", "Gemini 3 Flash"], "type": "nominal"}}}, {"data": {"name": "data-e06bb050491f4878f0c18ef689f5e639"}, "mark": {"type": "circle", "color": "#6B9BD2", "size": 100}, "encoding": {"tooltip": [{"field": "Model_lbl", "type": "nominal"}, {"field": "Ishan", "format": "$,.0f", "title": "Ishan mean", "type": "quantitative"}], "x": {"field": "Ishan", "title": "Mean Recommended Annual Salary (USD)", "type": "quantitative"}, "y": {"field": "Model_lbl", "sort": ["Claude Haiku 4.5 \u2605", "Claude Sonnet 4.6 \u2605", "Claude Opus 4.6 \u2605", "GPT-4o Mini", "GPT-4.1 \u2605", "Gemini 3 Flash"], "type": "nominal"}}}, {"data": {"name": "data-664051dd9920ba2b2109750d17fb0e3d"}, "mark": {"type": "circle", "size": 80}, "encoding": {"color": {"field": "Name", "legend": {"orient": "bottom", "title": "Resume name"}, "scale": {"domain": ["Ishani", "Ishan"], "range": ["#E07B7B", "#6B9BD2"]}, "type": "nominal"}, "opacity": {"value": 0}}}], "height": 300, "title": {"text": "Ishani vs Ishan \u2014 Mean Salary Estimate by Model", "subtitle": ["Left dot = Ishani (female name), Right dot = Ishan (male name). \u2605 = Bonferroni-corrected significance (\u03b1 = 0.05 / 6 models)"]}, "width": 540, "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json", "datasets": {"data-e06bb050491f4878f0c18ef689f5e639": [{"Model": "Claude Haiku 4.5", "Model_lbl": "Claude Haiku 4.5 \u2605", "Family": "Claude", "Ishan": 142176.66666666666, "Ishani": 140016.66666666666, "Sig": true, "SigColor": "#9c1e11"}, {"Model": "Claude Opus 4.6", "Model_lbl": "Claude Opus 4.6 \u2605", "Family": "Claude", "Ishan": 135870.76710435384, "Ishani": 135000.0, "Sig": true, "SigColor": "#9c1e11"}, {"Model": "Claude Sonnet 4.6", "Model_lbl": "Claude Sonnet 4.6 \u2605", "Family": "Claude", "Ishan": 136936.66666666666, "Ishani": 130283.33333333333, "Sig": true, "SigColor": "#9c1e11"}, {"Model": "GPT-4.1", "Model_lbl": "GPT-4.1 \u2605", "Family": "OpenAI", "Ishan": 165668.66666666666, "Ishani": 164992.66666666666, "Sig": true, "SigColor": "#9c1e11"}, {"Model": "GPT-4o Mini", "Model_lbl": "GPT-4o Mini", "Family": "OpenAI", "Ishan": 123036.66666666667, "Ishani": 123486.66666666667, "Sig": false, "SigColor": "#b0b0b0"}, {"Model": "Gemini 3 Flash", "Model_lbl": "Gemini 3 Flash", "Family": "Google", "Ishan": 144238.38383838383, "Ishani": 143924.10119840212, "Sig": false, "SigColor": "#b0b0b0"}], "data-664051dd9920ba2b2109750d17fb0e3d": [{"Name": "Ishani", "x": 0, "y": 0}, {"Name": "Ishan", "x": 0, "y": 0}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

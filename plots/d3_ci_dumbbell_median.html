@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@6.1.0"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300, "strokeWidth": 0}, "axis": {"gridColor": "#f0f0f0", "gridWidth": 0.5, "labelFont": "Helvetica Neue, Arial, sans-serif", "labelFontSize": 12, "tickColor": "#ccc", "titleFont": "Helvetica Neue, Arial, sans-serif", "titleFontSize": 13}, "legend": {"labelFont": "Helvetica Neue, Arial, sans-serif", "labelFontSize": 12, "titleFont": "Helvetica Neue, Arial, sans-serif", "titleFontSize": 12}, "title": {"anchor": "start", "font": "Helvetica Neue, Arial, sans-serif", "fontSize": 16, "fontWeight": "bold", "subtitleColor": "#666", "subtitleFontSize": 11}}, "layer": [{"data": {"name": "data-92179e4eddb94292a1e836c5b87baea3"}, "mark": {"type": "rule", "strokeWidth": 2.5}, "encoding": {"color": {"condition": {"test": "datum.Sig", "value": "#444"}, "value": "#ccc"}, "strokeDash": {"condition": {"test": "datum.Sig", "value": [1, 0]}, "value": [4, 3]}, "x": {"axis": {"format": "$,.0f", "labelAngle": -20, "tickCount": 5}, "field": "Ishani", "scale": {"zero": false}, "type": "quantitative"}, "x2": {"field": "Ishan"}, "y": {"axis": {"labelFontSize": 12, "labelLimit": 200}, "field": "Model_lbl", "sort": ["Claude Haiku 4.5 \u2605", "Claude Sonnet 4.6 \u2605", "Claude Opus 4.6 \u2605", "GPT-4o Mini", "GPT-4.1 \u2605", "Gemini 3 Flash"], "title": null, "type": "nominal"}}}, {"data": {"name": "data-cfb354c0d38d730ddabd8c332f58143f"}, "mark": {"type": "errorbar", "ticks": true}, "encoding": {"color": {"field": "Name", "scale": {"domain": ["Ishani", "Ishan"], "range": ["#E07B7B", "#6B9BD2"]}, "type": "nominal"}, "x": {"field": "ci_lo", "type": "quantitative"}, "x2": {"field": "ci_hi"}, "y": {"field": "Model_lbl", "sort": ["Claude Haiku 4.5 \u2605", "Claude Sonnet 4.6 \u2605", "Claude Opus 4.6 \u2605", "GPT-4o Mini", "GPT-4.1 \u2605", "Gemini 3 Flash"], "type": "nominal"}}}, {"data": {"name": "data-cfb354c0d38d730ddabd8c332f58143f"}, "mark": {"type": "circle", "opacity": 1, "size": 80}, "encoding": {"color": {"field": "Name", "legend": {"orient": "bottom", "title": "Resume name"}, "scale": {"domain": ["Ishani", "Ishan"], "range": ["#E07B7B", "#6B9BD2"]}, "type": "nominal"}, "x": {"field": "median", "title": "Median Recommended Annual Salary (USD)", "type": "quantitative"}, "y": {"field": "Model_lbl", "sort": ["Claude Haiku 4.5 \u2605", "Claude Sonnet 4.6 \u2605", "Claude Opus 4.6 \u2605", "GPT-4o Mini", "GPT-4.1 \u2605", "Gemini 3 Flash"], "type": "nominal"}}}], "height": 300, "title": {"text": "Group Medians with 95% Bootstrap Confidence Intervals", "subtitle": ["Solid connector = Bonferroni-significant (Mann\u2013Whitney U). \u2605 = Bonferroni-corrected significance (\u03b1 = 0.05 / 6 models)"]}, "width": 540, "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json", "datasets": {"data-92179e4eddb94292a1e836c5b87baea3": [{"Model_lbl": "Claude Haiku 4.5 \u2605", "Ishan": 140000.0, "Ishani": 130000.0, "Sig": true}, {"Model_lbl": "Claude Opus 4.6 \u2605", "Ishan": 135000.0, "Ishani": 135000.0, "Sig": true}, {"Model_lbl": "Claude Sonnet 4.6 \u2605", "Ishan": 135000.0, "Ishani": 130000.0, "Sig": true}, {"Model_lbl": "GPT-4.1 \u2605", "Ishan": 165000.0, "Ishani": 165000.0, "Sig": true}, {"Model_lbl": "GPT-4o Mini", "Ishan": 120000.0, "Ishani": 120000.0, "Sig": false}, {"Model_lbl": "Gemini 3 Flash", "Ishan": 145000.0, "Ishani": 145000.0, "Sig": false}], "data-cfb354c0d38d730ddabd8c332f58143f": [{"Model_lbl": "Claude Haiku 4.5 \u2605", "Name": "Ishan", "median": 140000.0, "ci_lo": 140000.0, "ci_hi": 145000.0}, {"Model_lbl": "Claude Haiku 4.5 \u2605", "Name": "Ishani", "median": 130000.0, "ci_lo": 130000.0, "ci_hi": 140000.0}, {"Model_lbl": "Claude Opus 4.6 \u2605", "Name": "Ishan", "median": 135000.0, "ci_lo": 135000.0, "ci_hi": 135000.0}, {"Model_lbl": "Claude Opus 4.6 \u2605", "Name": "Ishani", "median": 135000.0, "ci_lo": 135000.0, "ci_hi": 135000.0}, {"Model_lbl": "Claude Sonnet 4.6 \u2605", "Name": "Ishan", "median": 135000.0, "ci_lo": 130000.0, "ci_hi": 135000.0}, {"Model_lbl": "Claude Sonnet 4.6 \u2605", "Name": "Ishani", "median": 130000.0, "ci_lo": 130000.0, "ci_hi": 130000.0}, {"Model_lbl": "GPT-4.1 \u2605", "Name": "Ishan", "median": 165000.0, "ci_lo": 165000.0, "ci_hi": 165000.0}, {"Model_lbl": "GPT-4.1 \u2605", "Name": "Ishani", "median": 165000.0, "ci_lo": 165000.0, "ci_hi": 165000.0}, {"Model_lbl": "GPT-4o Mini", "Name": "Ishan", "median": 120000.0, "ci_lo": 120000.0, "ci_hi": 120000.0}, {"Model_lbl": "GPT-4o Mini", "Name": "Ishani", "median": 120000.0, "ci_lo": 120000.0, "ci_hi": 120000.0}, {"Model_lbl": "Gemini 3 Flash", "Name": "Ishan", "median": 145000.0, "ci_lo": 145000.0, "ci_hi": 145000.0}, {"Model_lbl": "Gemini 3 Flash", "Name": "Ishani", "median": 145000.0, "ci_lo": 145000.0, "ci_hi": 145000.0}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>
