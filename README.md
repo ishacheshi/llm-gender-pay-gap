@@ -32,8 +32,6 @@ Five of six models recommend higher salaries for the male-coded resume (Ishan). 
 
 **Gemini 3 Flash** shows no meaningful gap in either direction.
 
-### Percentage Gap by Model
-
 <img width="847" height="400" alt="Percentage salary gap by model" src="https://github.com/user-attachments/assets/b36fd937-daa4-4d6f-bc0a-e685f3b1d223" />
 
 
