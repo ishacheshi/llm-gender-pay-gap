@@ -35,6 +35,7 @@ Five of six models recommend higher salaries for the male-coded resume (Ishan). 
 
 ![Salary distributions by model and gender](d1_final.html)
 ![Salary distributions by model and gender]([[https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png](https://github.com/ishacheshi/llm-gender-pay-gap/blob/main/plots/d1_final.html)](https://github.com/ishacheshi/llm-gender-pay-gap/blob/main/plots/d1_final.html) "Salary distributions by model and gender")
+<img width="990" height="461" alt="Salary distributions by model and gender" src="https://github.com/user-attachments/assets/10691ef6-b34c-4536-aedd-e5f8354470e8" />
 
 
 ### Percentage Gap by Model
